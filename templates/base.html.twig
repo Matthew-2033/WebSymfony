@@ -1,0 +1,48 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+    <body>
+    {# {% block sidebar %}
+            {% include 'component/sidebard.html.twig' %}
+        {% endblock %} #}
+
+        <div class="main-content">
+
+            {% include 'component/navbard.html.twig' %}
+
+
+            <div class="header bg-gray pb-6 pt-5 pt-md-8">
+                <div class="container-fluid">
+                    <div class="header-body">
+                        <div class="row">
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-warning" role="alert">
+                                    <strong> {{ message }} </strong>
+                                </div>
+                            {% endfor %}
+                            {#{{ render(controller('App\\Controller\\ComponentController::card')) }}#}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            {% block body %} {% endblock %}
+
+
+        </div>
+
+         <footer>
+            {% block javascripts %}
+                {{ encore_entry_script_tags('app') }}
+            {% endblock %}
+         </footer>
+    </body>
+</html>
+

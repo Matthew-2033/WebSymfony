@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container-fluid mt--7">
+        <div class="row">
+            <div class="col-xl-12 mb-5 mb-xl-0">
+                <div class="card card-stats mb-4 mb-xl-0">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                {#
+                                <div class="alert alert-warning" role="alert">
+                                    <strong>Warning!</strong> This is a warning alert—check it out!
+                                </div>
+                                <form class="form" action="{{ path('client_proccess') }}" method="POST" >
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="name">Nome</label>
+                                            <input type="text" class="form-control" id="nome" name="name" placeholder="Nome">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="borndate">Data de Nascimento</label>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                                </div>
+                                                <input class="form-control datepicker" id="bornDate"  name="borndate" placeholder="Select date" type="text" value="06/20/2019">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-6">
+                                            <label for="cpf">CPF</label>
+                                            <input type="text" name="cpf" class="form-control" id="cpf" placeholder="123.456.789-56">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label for="inputAddress">Email</label>
+                                            <input type="'email" class="form-control" id="email" placeholder="exemplo@exemplo.com">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sex" id="masculino" value="MASCULINO">
+                                            <label class="form-check-label" for="masculino">
+                                                MASCULINO
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="sex" id="feminino" value="FEMININO">
+                                            <label class="form-check-label" for="feminino">
+                                                FEMININO
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block"> CADASTRAR NOVO ALUNO </button>
+
+                                </form>
+                            #}
+                                {{ form_start(clientForm) }}
+                                    {{ form_widget(clientForm) }}
+                                        <button type="submit" class="btn btn-primary">Create!</button>
+                                {{ form_end(clientForm) }}
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2",
+    "@symfony/webpack-encore": "^0.28.0",
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
+    "webpack-notifier": "^1.6.0"
+  },
+  "dependencies": {
+    "animate": "^1.0.0",
+    "array-find": "^1.0.0",
+    "aws-sdk": "^2.522.0",
+    "bootstrap-datepicker": "^1.9.0",
+    "bootstrap-table": "^1.15.4",
+    "browser-sync": "^2.26.7",
+    "chart.js": "^2.8.0",
+    "child_process": "^1.0.2",
+    "console": "^0.7.2",
+    "core-js": "^3.2.1",
+    "datatables": "^1.10.18",
+    "fs": "0.0.1-security",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-imagemin": "^6.1.0",
+    "gulp-sass": "^4.0.2",
+    "highcharts": "^7.2.0",
+    "ionicons": "^4.6.3",
+    "module": "^1.2.5",
+    "net": "^1.0.2",
+    "nucleo": "^0.0.0",
+    "parse-int": "^1.0.3",
+    "perfect-scrollbar": "^1.4.0",
+    "select2": "^4.0.10",
+    "tablesorter": "^2.31.1",
+    "tls": "0.0.1",
+    "webtimer": "^0.0.6"
+  }
+}
