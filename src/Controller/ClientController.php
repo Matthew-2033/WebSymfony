@@ -6,9 +6,9 @@ namespace App\Controller;
 use App\Entity\Client;
 use App\Form\ClientForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Knp\Component\Pager\PaginatorInterface;
 use App\Manager\ClientManager;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -29,14 +29,22 @@ class ClientController extends AbstractController
     /**
      * @Route("/", name="client")
      */
-    public function index(Request $request, PaginatorInterface $paginator)
+    public function index(Request $request)
     {
-        $token = $request->getSession()->get('token');
-        $clients = $this->manager->getClients($token);
+        try{
+            $token = $request->getSession()->get('token');
+            $clients = $this->manager->getClients($token);
 
-        return $this->render( 'client/index.html.twig', [
-            'clients' => $clients['data']
-        ]);
+            return $this->render( 'client/index.html.twig', [
+                'clients' => $clients
+            ]);
+
+        } catch (UnauthorizedHttpException $responseException) {
+            return $this->redirectToRoute("app_logout");
+
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
     }
 
     /**
@@ -49,20 +57,26 @@ class ClientController extends AbstractController
 
         $form->handleRequest($request);
 
+        $token = $request->getSession()->get('token');
         /**
          * If the following if statement falls in to false, it will
          * also render the form but this time with the error.
          */
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $data = $form->getData();
-            dd($data);
+            $client = $form->getData();
+
+            $response = $this->manager->postClient($token, $client);
+            dd($response);
+
             /**
              * Add Flash Message that informs the success
              * Works like a shortcut to save a message on the session and
              * only live in the session until they are read for the first time
              */
-            $this->addFlash('success', 'Usuário Cadastrado');
+            if($response->getSuccess()) {
+                $this->addFlash('success', 'Usuário Cadastrado');
+            }
 
             return $this->redirect('/client');
         }

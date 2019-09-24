@@ -99,7 +99,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
         if (!$checked) return false;
 
         $token = $this->token->getToken($user->getUsername(), $user->getPassword());
-
         $this->session->set('token', $token['access_token']);
 
         return $checked;

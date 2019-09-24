@@ -4,7 +4,10 @@
 namespace App\Manager;
 
 
+use App\Entity\Client;
 use App\Repository\ClientRepository;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
 
 class ClientManager
 {
@@ -17,12 +20,19 @@ class ClientManager
 
     public function getClients($token): array
     {
+
         $clients = $this->clientRepository->getClients($token);
-        return $clients;
+
+        if ($clients->getCode() == 401) {
+            throw new UnauthorizedHttpException($clients->getCode(),'Não foi possível realizar login, tente novamente');
+        }
+
+        return $clients->getData();
     }
 
-    public function postClient()
+    public function postClient($token, Client $client)
     {
-
+        $return = $this->clientRepository->postClient($token, $client);
+        return $return;
     }
 }

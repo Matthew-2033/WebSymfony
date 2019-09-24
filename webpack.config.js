@@ -25,8 +25,8 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('login', './assets/css/login.css')
-    .addEntry('table', './assets/js/table/table.js')
-    .addEntry('table_css', './assets/css/table/table.css')
+    .addEntry('table_js', './assets/js/table/table.js')
+    .addEntry('table', './assets/css/table/table.css')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.

@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 
-use App\Entity\Security\User;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -19,5 +19,7 @@ abstract class BaseController extends AbstractController
     {
         return $request->getSession()->get('token');
     }
+
+
 
 }

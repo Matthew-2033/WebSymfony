@@ -90,7 +90,7 @@ class Client implements JsonSerializable
     /**
      * @return DateTime
      */
-    public function getBornDate(): ?DateTime
+    public function getBornDate(): ?string
     {
         return $this->bornDate;
     }
@@ -98,9 +98,9 @@ class Client implements JsonSerializable
     /**
      * @param DateTime $bornDate
      */
-    public function setBornDate($bornDate): void
+    public function setBornDate(DateTime $bornDate): void
     {
-        $this->bornDate = $bornDate;
+        $this->bornDate = $bornDate->format("Y-m-d");
     }
 
     /**
@@ -186,13 +186,14 @@ class Client implements JsonSerializable
     public function jsonSerialize()
     {
         return array(
-            'uuid' => $this->getUuid(),
-            'name' => $this->getName(),
-            'sex' => $this->getSex(),
+            'id' => $this->getUuid(),
+            'nome' => $this->getName(),
+            'sexo' => $this->getSex(),
             'cpf' => $this->getCpf(),
-            'bornDate' => $this->getBornDate(),
-            'lastEvaluation' => $this->getLastEvaluation(),
-            'active' => $this->getActive()
+            'email' => $this->getEmail(),
+            'dataNascimento' => $this->getBornDate(),
+            'ultimaAvaliacao' => $this->getLastEvaluation(),
+            'ativo' => $this->getActive()
         );
     }
 
