@@ -11,7 +11,6 @@ import $ from 'jquery';
 import 'bootstrap';
 import Highcharts from 'highcharts';
 import avgGrease from './charts/avgGrease';
-import 'datatables';
 import 'bootstrap-table/dist/bootstrap-table';
 import 'bootstrap-table/dist/locale/bootstrap-table-pt-BR';
 import 'bootstrap-table/dist/extensions/export/bootstrap-table-export';
@@ -20,7 +19,15 @@ import '@fortawesome/fontawesome-free/js/fontawesome';
 import '@fortawesome/fontawesome-free/js/solid';
 import '@fortawesome/fontawesome-free/js/regular';
 import '@fortawesome/fontawesome-free/js/brands';
-import datepicker from 'bootstrap-datepicker';
+import '../css/toglle.scss';
+import 'datatables.net-bs4';
+
+
+$('.table').dataTable({
+    "bInfo": false,
+    paging: false,   
+});
+
 
 $(document).ready(function() {
 
@@ -168,3 +175,21 @@ $(document).ready(function() {
 
 
 avgGrease(Highcharts);
+
+$("document").ready(function(){
+    $(".tab-slider--body").hide();
+    $(".tab-slider--body:first").show();
+});
+
+$(".tab-slider--nav li").click(function() {
+    $(".tab-slider--body").hide();
+    var activeTab = $(this).attr("rel");
+    $("#"+activeTab).fadeIn();
+    if($(this).attr("rel") == "tab2"){
+        $('.tab-slider--tabs').addClass('slide');
+    }else{
+        $('.tab-slider--tabs').removeClass('slide');
+    }
+    $(".tab-slider--nav li").removeClass("active");
+    $(this).addClass("active");
+});

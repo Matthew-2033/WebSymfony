@@ -28,13 +28,10 @@ class DashboardManager
 
         foreach ($information['data']['mediaPorcentagem'] as $key) {
             $average[] = new AvgGrease($key['sexo'], $key['autor'], (float) $key['media']);
-
         }
 
         $this->dashboardInfomation->setAvgGrease($average);
 
         return $this->dashboardInfomation;
     }
-
-
 }

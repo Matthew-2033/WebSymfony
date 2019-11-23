@@ -15,9 +15,10 @@
         <div class="main-content">
 
             {% include 'component/navbard.html.twig' %}
-
-
-            <div class="header bg-gray pb-6 pt-5 pt-md-8">
+            {#<div class="flash_message" role="alert">
+                <strong> message </strong>
+            </div>#}
+            <div class="header pb-6 pt-5 pt-md-8" style="background-color: #0b90a8">
                 <div class="container-fluid">
                     <div class="header-body">
                         <div class="row">
@@ -32,8 +33,9 @@
                 </div>
             </div>
 
+            {% block body %}
 
-            {% block body %} {% endblock %}
+            {% endblock %}
 
 
         </div>

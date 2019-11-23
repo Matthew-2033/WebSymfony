@@ -14,6 +14,11 @@ abstract class AbstractRepository
         return 'Bearer '. $token;
     }
 
+    protected function createHeader(string $authorization, $contentType = 'application/json'): array
+    {
+        return array("Authorization" => $authorization, 'Content-Type' => $contentType);
+    }
+
     protected function getResponse(Response $response): ResponseApi
     {
         $code = $response->code;

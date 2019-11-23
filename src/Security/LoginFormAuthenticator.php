@@ -77,9 +77,14 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
+
+        $user = new User();
+        $user->setUsername($credentials['username']);
+        $user->setPassword($credentials[ 'password']);
 
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => $credentials['username']]);
 
@@ -88,6 +93,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
             throw new CustomUserMessageAuthenticationException('Login ou Senha inválidos.');
         }
 
+        $token = $this->token->getToken($user->getUsername(), $credentials['password']);
+        $this->session->set('token', $token['access_token']);
 
         return $user;
     }
@@ -98,8 +105,6 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator
 
         if (!$checked) return false;
 
-        $token = $this->token->getToken($user->getUsername(), $user->getPassword());
-        $this->session->set('token', $token['access_token']);
 
         return $checked;
     }

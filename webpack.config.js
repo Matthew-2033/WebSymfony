@@ -26,7 +26,9 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('login', './assets/css/login.css')
     .addEntry('table_js', './assets/js/table/table.js')
-    .addEntry('table', './assets/css/table/table.css')
+    .addEntry('table', './assets/css/table/table.scss')
+    .addEntry('changePage', './assets/js/changePage.js')
+    .addEntry('avaliado', './assets/js/avaliado/avaliado.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -68,7 +70,7 @@ Encore
 
     // uncomment if you're having problems with a jQuery plugin
     .autoProvidejQuery()
-
+    .enableSassLoader()
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')

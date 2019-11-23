@@ -4,6 +4,8 @@
 namespace App\Entity\Response;
 
 
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+
 class ResponseApi
 {
     private $code;
@@ -101,4 +103,10 @@ class ResponseApi
         $this->code = $code;
     }
 
+    public function verifyResponse() {
+
+        if ($this->getCode() == 401) {
+            throw new UnauthorizedHttpException($this->getCode(),'Não foi possível realizar login, tente novamente');
+        }
+    }
 }

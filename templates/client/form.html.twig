@@ -4,11 +4,10 @@
     <div class="container-fluid mt--7">
         <div class="row">
             <div class="col-xl-12 mb-5 mb-xl-0">
-                <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card card-stats mb-4 mb-xl-0 animated fadeInUp">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
-                                {#
+                            <div class="col">                                
                                 <div class="alert alert-warning" role="alert">
                                     <strong>Warning!</strong> This is a warning alert—check it out!
                                 </div>
@@ -59,13 +58,14 @@
                                     <button type="submit" class="btn btn-primary btn-lg btn-block"> CADASTRAR NOVO ALUNO </button>
 
                                 </form>
-                            #}
+                            
+                            {#
                                 {{ form_start(clientForm) }}
                                     {{ form_widget(clientForm) }}
                                         <button type="submit" class="btn btn-primary">Create!</button>
                                 {{ form_end(clientForm) }}
 
-
+                            #}
                             </div>
                         </div>
                     </div>

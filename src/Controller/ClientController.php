@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Client;
 use App\Form\ClientForm;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 /**
  * Class ClientController
  * @package App\Controller
- * @Route("/client")
+ * @Route("/avaliado")
  */
 class ClientController extends AbstractController
 {
@@ -27,16 +27,16 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/", name="client")
+     * @Route("/", name="client_list")
      */
     public function index(Request $request)
     {
         try{
             $token = $request->getSession()->get('token');
             $clients = $this->manager->getClients($token);
-
+            
             return $this->render( 'client/index.html.twig', [
-                'clients' => $clients
+                'clients' => $clients                
             ]);
 
         } catch (UnauthorizedHttpException $responseException) {
@@ -48,11 +48,11 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/form", name="client_form")
+     * @Route("/cadastra", name="client_form")
      */
     public function formClient(Request $request)
     {
-        /** If the method is a GET, will just render form withou any information */
+        /** If the method is a GET, will just render form without any information */
         $form = $this->createForm(ClientForm::class);
 
         $form->handleRequest($request);
@@ -65,10 +65,9 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $client = $form->getData();
-
             $response = $this->manager->postClient($token, $client);
-            dd($response);
 
+            
             /**
              * Add Flash Message that informs the success
              * Works like a shortcut to save a message on the session and
@@ -78,7 +77,7 @@ class ClientController extends AbstractController
                 $this->addFlash('success', 'Usuário Cadastrado');
             }
 
-            return $this->redirect('/client');
+            return $this->redirect('/avaliado');
         }
         return $this->render('client/form.html.twig', [
             'clientForm' => $form->createView()
@@ -86,7 +85,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/process", name="client_proccess")
+     * @Route("/processa", name="client_proccess")
      */
     public function proccessClient(Request $request, ValidatorInterface $validator)
     {
@@ -98,4 +97,15 @@ class ClientController extends AbstractController
         dd($client->jsonSerialize());
     }
 
+    /**
+     * @Route("/changeStatus/{id}", name="change_status")
+     */
+    public function changeStatus(Request $request, string $id)
+    {
+        $token = $request->getSession()->get('token');
+        $response = $this->manager->changeStatus($token, $id);
+        print_r($response);
+        die();
+        return new JsonResponse($response->getCode(), $response);
+    }
 }

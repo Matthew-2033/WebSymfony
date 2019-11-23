@@ -38,7 +38,7 @@ class ApiToken
 
             $body = Request\Body::Form($parameters);
             $response = Request::post($this->url, $headers, $body);
-
+            //dd($response);
             return json_decode($response->raw_body, true);
 
         }catch (Exception $exception) {

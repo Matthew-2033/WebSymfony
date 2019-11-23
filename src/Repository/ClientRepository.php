@@ -52,7 +52,23 @@ class ClientRepository extends AbstractRepository
             return $this->getResponse($response);
 
         } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
 
+    public function deleteClient(string $token, string $id): ResponseApi
+    {
+        try {
+
+            $authorization = $this->makeAuthorization($token);
+
+            $header = array("Authorization" => $authorization, 'id' => $id, 'Content-Type' => 'application/json');
+            $response = Request::delete($this->url, $header);
+
+            return $this->getResponse($response);
+
+        } catch(Exception $ex) {
+            throw $ex;
         }
     }
 }

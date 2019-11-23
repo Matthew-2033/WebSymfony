@@ -1,98 +1,148 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello DashboardController!{% endblock %}
-
+{% block title %} DASHBOARD {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('table') }}
+{% endblock %}
 {% block body %}
 
     <div class="container-fluid mt--7">
-        <div class="row">
-            <div class="col-xl-8 mb-5 mb-xl-0">
-                <div class="card card-stats mb-4 mb-xl-0">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <div id="container" data-dados="{{ chart_avgGrease }}" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                            </div>
+    <div class="row">
+        <div class="col-xl-10 mb-5 mb-xl-0 animated fadeInUp delay-1s">
+            <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <div id="container" data-dados="{{ chart_avgGrease }}" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col">
-                <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="mb-0">Page visits</h3>
-                            </div>
-                            <div class="col text-right">
-                                <a href="#!" class="btn btn-sm btn-primary">See all</a>
-                            </div>
-                        </div>
+        <div class="col">
+            <div class="card-div animated fadeInRight delay-1s">
+                <div class="button-holder card text-center shadow button-holder" data-url="{{ path("client_form") }}">
+                    <div class="card-body">
+                        <a href="{{ path('client_form') }}" class="">
+                            <i class="fas fa-user-circle fa-4x"></i>
+                            <br>
+                            CADASTRAR
+                        </a>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush" >
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="progress-wrapper">
-                                        <div class="progress-info">
-                                            <div class="progress-label">
-                                                <span>Task completed</span>
-                                            </div>
-                                            <div class="progress-percentage">
-                                                <span>60%</span>
-                                            </div>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress-wrapper">
-                                        <div class="progress-info">
-                                            <div class="progress-label">
-                                                <span>Task completed</span>
-                                            </div>
-                                            <div class="progress-percentage">
-                                                <span>60%</span>
-                                            </div>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="progress-wrapper">
-                                        <div class="progress-info">
-                                            <div class="progress-label">
-                                                <span>Task completed</span>
-                                            </div>
-                                            <div class="progress-percentage">
-                                                <span>60%</span>
-                                            </div>
-                                        </div>
-                                        <div class="progress">
-                                            <div class="progress-bar bg-default" role="progressbar" aria-valuenow="60"
-                                                 aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                </div>
+            </div>
+            <div class="card-div animated fadeInRight delay-1s">
+                <div class="button-holder card text-center shadow button-holder">
+                    <div class="card-body">
+                        <i class="fas fa-running fa-4x"></i>
+                        <br>
+                        TREINOS
+                    </div>
+                </div>
+            </div>
+            <div class="card-div animated fadeInRight delay-1s">
+                <div class="button-holder card text-center shadow button-holder">
+                    <div class="card-body">
+                        <i class="fas fa-running fa-4x"></i>
+                        <br>
+                        TREINOS
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-xl-12 mb-5 mb-xl-0">
+            <div class="row">
+                <div class="col">
+                    <div class="tab-slider--nav animated fadeInLeft">
+                        <ul class="tab-slider--tabs">
+                            <li class="tab-slider--trigger active" id="toggle1" rel="tab1">Avaliados</li>
+                            <li class="tab-slider--trigger " id="toggle2" rel="tab2">Não avaliados</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-6 md-5">
+                    <div class="input-group mb-3 animated fadeInRight">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input type="text" id="search" class="form-control" placeholder="Procure pelo Avaliado" aria-label="Procure pelo Avaliado" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div id="tab1" class="tab-slider--body animated fadeInRight">
+                <div>
+                    <table class="fixed_header">
+                        <thead>
+                        <tr>
+                            <th> ID</th>
+                            <th scope="col"> NOME</th>
+                            <th scope="col"> SEXO</th>
+                            <th scope="col"> ULTIMA AVALIAÇÃO</th>
+                            <th scope="col">  </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for key, client in clients %}
+                            {% if client.ultimaAvaliacao %}
+                            <tr class="item">
+                                <td>{{ key + 1 }}</td>
+                                <td>{{ client.nome }}</td>
+                                <td>{{ client.sexo }}</td>
+                                <td>{{ client.ultimaAvaliacao|date("d/m/Y") }}</td>
+                                <td>
+                                    <a href="#" data-id="{{ client.id }}" class="btn btn-primary btn-circle"> <i class="fas icon fa-pen-alt"></i> </a>
+                                    <a href="#" data-id="{{ client.id }}" class="btn btn-success btn-circle"> <i class="fas icon fa-calendar-week"></i> </a>
+                                    <a href="#" data-id="{{ client.id }}" class="btn btn-danger btn-circle"> <i class="fas icon fa-trash"></i> </a>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <table class="head-fixed"></table>
+                </div>
+            </div>
+
+                <div id="tab2" class="tab-slider--body fixed_header animated fadeInRight">
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th> ID</th>
+                                <th scope="col"> NOME</th>
+                                <th scope="col"> SEXO</th>
+                                <th scope="col"> </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for key, client in clients %}
+                                {% if not client.ultimaAvaliacao %}
+                                <tr class="item">
+                                    <td>{{ key + 1 }}</td>
+                                    <td>{{ client.nome }}</td>
+                                    <td>{{ client.sexo }}</td>
+                                    <td>
+                                        <a href="#" data-id="{{ client.id }}" class="btn btn-primary btn-circle"> <i class="fas icon fa-chart-pie"></i> </a>
+                                        <a href="#" data-id="{{ client.id }}" class="btn btn-danger btn-circle"> <i class="fas icon fa-trash"></i> </a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('table_js') }}
+    {{ encore_entry_script_tags('avaliado') }}
+        {{ encore_entry_script_tags('changePage') }}
 {% endblock %}

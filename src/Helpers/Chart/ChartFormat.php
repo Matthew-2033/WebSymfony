@@ -10,8 +10,12 @@ class ChartFormat
      * @param array $data
      * @return json
      */
-    public static function chartAvgGrease(array $data): string
+    static public function chartAvgGrease(array $data): string
     {
+        $masculino = array_filter($data, function ($index){
+            return $index['sex'] == 'MASCULINO';
+        });
 
+        dd($masculino);
     }
 }

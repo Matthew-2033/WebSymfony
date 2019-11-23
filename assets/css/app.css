@@ -1,5 +1,21 @@
 @import '~bootstrap';
 @import "argon.css";
 @import "argon-dashboard.css";
-@import "fixedButton.css";
+@import "toglle.scss";
+@import "~datatables.net-bs4";
+@import "flash_message.scss";
 
+
+
+.row {
+    padding: 10px;
+}
+
+.card-div {
+    padding-bottom: 20px;
+}
+
+.button-holder:hover {
+    transform: scale(1.1);
+    color: #0b90a8;
+}

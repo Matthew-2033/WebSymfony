@@ -1,7 +1,5 @@
 import 'select2';
 
-// The table features must be put here:
-
 /**
  * Listener for the table selection
  */
@@ -24,25 +22,35 @@ $('.filter').keyup(function () {
     })
 })
 
-$('table.paginated').each(function() {
-    var currentPage = 0;
-    var numPerPage = 10;
-    var $table = $(this);
-    $table.bind('repaginate', function() {
-        $table.find('tbody tr').hide().slice(currentPage * numPerPage, (currentPage + 1) * numPerPage).show();
-    });
-    $table.trigger('repaginate');
-    var numRows = $table.find('tbody tr').length;
-    var numPages = Math.ceil(numRows / numPerPage);
-    var $pager = $('<div class="pager"></div>');
-    for (var page = 0; page < numPages; page++) {
-        $('<span class="page-number page-link"></span>').text(page + 1).bind('click', {
-            newPage: page
-        }, function(event) {
-            currentPage = event.data['newPage'];
-            $table.trigger('repaginate');
-            $(this).addClass('active').siblings().removeClass('active');
-        }).appendTo($pager).addClass('clickable');
+$("document").ready(function(){
+    $(".tab-slider--body").hide();
+    $(".tab-slider--body:first").show();
+});
+
+$(".tab-slider--nav li").click(function() {
+    $(".tab-slider--body").hide();
+    var activeTab = $(this).attr("rel");
+    $("#"+activeTab).fadeIn();
+    if($(this).attr("rel") == "tab2"){
+        $('.tab-slider--tabs').addClass('slide');
+    }else{
+        $('.tab-slider--tabs').removeClass('slide');
     }
-    $pager.insertBefore($table).find('span.page-number:first').addClass('active');
+    $(".tab-slider--nav li").removeClass("active");
+    $(this).addClass("active");
+});
+
+
+$('#toggle1').on('click', () => {
+    $('#tab2').add .classList.add('animated', 'fadeInRight')
+})
+
+
+$(document).ready(function(){
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
 });

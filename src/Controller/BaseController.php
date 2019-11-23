@@ -19,7 +19,4 @@ abstract class BaseController extends AbstractController
     {
         return $request->getSession()->get('token');
     }
-
-
-
 }
